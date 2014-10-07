@@ -1,0 +1,68 @@
+
+compile                  = "assignment.c"
+rebootfunc               = "reboot_node"
+messagerate              = 4000000usec
+minmessagesize           = 4096bytes
+maxmessagesize           = 8192bytes
+
+/* default WAN attributes */
+bandwidth            = 512000bps
+mtu                  = 9216bytes
+propagationdelay     = 1500000usec
+probframecorrupt     = 5
+probframeloss        = 5
+
+host Perth {
+	outputfile = "Perth.log"
+        ostype = "hurd"
+        x=200 y=200
+        link to Karratha {
+        }
+	link to Kalgoorlie {
+        }
+	link to Geraldton {
+        }
+	link to Albany {
+        }
+}
+
+host Karratha {
+        outputfile = "Karratha.log"
+        ostype = "macosx"
+        north west of Perth
+        link to Perth {
+        }
+	link to Kalgoorlie {
+        }
+
+}
+
+host Kalgoorlie {
+        outputfile = "Kalgoorlie.log"
+        ostype="linux"
+        north east of Perth
+	link to Perth {
+        }
+	link to Karratha {
+        }
+}
+
+host Geraldton {
+        outputfile = "Geraldton.log"
+        ostype="next"
+        south west of Perth
+        link to Perth {
+        }
+	link to Albany {
+        }
+}
+
+host Albany {
+	outputfile = "Albany.log"
+        ostype="mac"
+        south east of Perth
+        link to Perth {
+        }
+	link to Geraldton {
+        }
+}
